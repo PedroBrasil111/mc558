@@ -2,9 +2,11 @@ class Grafo():
     # n: numero de vertices
     def __init__(self, n=0):
         self.adj = [[] for _ in range(n)]
+        self.pesos = [[0] * n for _ in range(n)]
 
     def add_aresta(self, u, v, peso):
-        self.adj[u].append((v, peso))
+        self.adj[u].append(v)
+        self.pesos[u][v] = peso
 
     def find(self, pai, i):
         if pai[i] != i:
@@ -29,12 +31,12 @@ class Grafo():
 
         arestas = []
         for u in range(len(self.adj)):
-            for v, peso in self.adj[u]:
-                arestas.append((peso, u, v))
-        arestas.sort(key=lambda x: x[0])
+            for v in self.adj[u]:
+                arestas.append((u, v, self.pesos[u][v]))
+        arestas.sort(key=lambda x: x[2])
 
         pesos = 0
-        for peso, u, v in arestas:
+        for u, v, peso in arestas:
             x = self.find(pai, u)
             y = self.find(pai, v)
             if x != y:
