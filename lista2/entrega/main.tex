@@ -1,0 +1,109 @@
+\documentclass[
+    12pt,
+    a4paper,
+    brazil,
+    english
+]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{titlesec}
+\usepackage{graphicx} % For including graphics (e.g., logos)
+\usepackage{float} % To place floats (e.g., algorithms) precisely
+\usepackage{ragged2e} % For text justification
+\usepackage{caption} % To control caption formatting
+\usepackage{amsmath} % For better text formatting in math mode
+
+% Document metadata
+\title{Lista Avaliativa 2}
+\author{Pedro Brasil Barroso - RA 260637}
+\date{\today} % Automatically inserts today's date
+
+\captionsetup[algorithm]{labelformat=empty} % Removes numbering from algorithm captions
+\renewcommand{\thealgorithm}{} % Removes the numbering but keeps Algoritmo
+
+
+\begin{document}
+
+% Custom title page
+\begin{titlepage}
+    \centering
+
+    % Insert a logo if you want
+    %\includegraphics[width=0.2\textwidth]{logo.png} % Replace with your logo's path
+    \vspace*{6cm}
+
+    {\LARGE \textbf{MC558 - Lista Avaliativa 2}}
+    
+    \vspace{5.5cm}
+    {\Large Pedro Brasil Barroso - RA 260637}
+
+    \vfill
+
+    {\Large Universidade Estadual de Campinas} \\ % Replace with your university name
+    {\Large Instituto de Computação} \\
+
+    \vspace{1cm}
+\end{titlepage}
+
+\textbf{\largeÁrvore Geradora Mínima}
+\vspace{0.5cm}
+
+- \textbf{Problema escolhido:} \textit{Acacias}, 8 pontos
+
+\vspace{0.25cm}
+
+- \textbf{Definição do problema:}
+\begin{itemize}
+    \item \textbf{Entrada:} Um inteiro $N$, que representa o número de vértices, numerados de $1$ a $N$,
+    seguido de $N - 1$ linhas. Cada linha $i$ consiste em um inteiro não-negativo $k$, seguido de $k$
+    pares de inteiros $j$ e $c_{ij}$, tal que existe uma aresta não direcionada de $i$ para $j$ com peso $c_{ij}$.
+    \item \textbf{Saída:} Uma linha com dois inteiros, tais que o primeiro representa o número de componentes conexas no grafo e o segundo, a soma dos custos das árvores mínimas de cada componente.
+    \item \textbf{Solução:} O problema pode ser resolvido diretamente com pequenas alterações ao algoritmo de Kruskal visto em aula:
+\end{itemize}
+
+% Algorithm Section
+\begin{algorithm}
+    \caption{\textbf{Algoritmo:} AGM-\textsc{Kruskal}-\textsc{Acacias}($G$, w)}
+    \begin{algorithmic}[1]
+        \State $A \gets \emptyset$
+        \State $componentes \gets |V[G]|$
+        \State $custo \gets 0$
+        \State \textbf{para cada} $u \in V[G]$
+            \State \hspace{1em} \textnormal{\textsc{Make}-\textsc{Set}}($u$)
+        \State ordene as arestas em ordem não decrescente de peso
+        \State \textbf{para cada} $(u, v) \in E[G]$ na ordem obtida
+            \State \hspace{1em} \textbf{se} \textsc{Find-Set}($u$) $\neq$ \textsc{Find-Set}($v$)
+            \State \hspace{2em} $A \gets A \cup \{(u, v)\}$
+            \State \hspace{2em} \textsc{Union}($u$, $v$)
+            \State \hspace{2em} $custo \gets custo + \text{w}(u, v)$
+            \State \hspace{2em} $componentes \gets componentes - 1$
+            \State \textbf{devolva} $custo, componentes, A$
+        \end{algorithmic}
+    \end{algorithm}
+    \begin{itemize}
+        \item \textbf{Complexidade:} Como visto em aula, o algoritmo de Kruskal para árvores geradoras mínimas apresenta complexidade $O(E \log E)$, onde $E$ é o número de arestas do grafo. \\
+        Como as operações adicionadas (instanciação e soma nas variáveis "componentes" e "custo") são realizadas em O(1), \textsc{AGM-Kruskal-Acacias} possui complexidade $O(E \log E)$.
+        \item \textbf{Corretude:} \\
+        Note que, como $G$ pode ser desconexo, \textsc{AGM-Kruskal-Acacias} retorna uma floresta de árvores geradoras mínimas. \\
+        Para provar a corretude, é necessário utilizar a seguinte invariante:
+        \begin{quote}
+            \textit{No início de cada iteração, (1) $pesos$ é a soma dos pesos das arestas em $A$ e (2) $componentes$ é o número de componentes conexas em $G_A = (V, A)$.}
+        \end{quote}
+        \textbf{Base:} No início do algoritmo, $A = \emptyset$ e $componentes = |V[G]|$; logo, a invariante é verdadeira. \\
+        \textbf{Hipótese:} Suponha que a invariante é verdadeira no início da iteração $i$. \\
+        \textbf{Passo:} Na iteração $i + 1$: \\
+    Caso 1: A aresta $(u, v)$ é adicionada a $A$.
+    \begin{itemize}
+        \item (1) Então $u$ e $v$ são unidos em uma mesma componente conexa, reduzindo o número total de componentes em 1. Na linha 12, $componentes$ é decrementada em 1.
+        \item (2) Além disso, o peso da aresta $(u, v)$ é somado a $pesos$ na linha 11.
+    \end{itemize}
+    Caso 2: A aresta $(u, v)$ não é adicionada a $A$.
+    \begin{itemize}
+        \item (1) Neste caso, $u$ e $v$ já pertencem à mesma componente conexa, então $componentes$ não é alterada.
+        \item (2) O peso da aresta $(u, v)$ não é somado a $pesos$.
+    \end{itemize}
+    \textbf{Conclusão:} A invariante é mantida em todas as iterações; logo, ao final do algoritmo, $componentes$ é o número de componentes conexas em $G_A$ e $custo$ é a soma dos pesos das arestas em $A$.
+\end{itemize}
+
+
+\end{document}

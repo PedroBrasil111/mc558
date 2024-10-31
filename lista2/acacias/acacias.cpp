@@ -39,6 +39,8 @@ public:
         vector<int> pai(adj.size());
         vector<int> rank(adj.size(), 0);
         vector<tuple<long int, int, int>> arestas;
+        int componentes = adj.size();
+        long int pesos = 0; 
 
         for (int i = 0; i < adj.size(); ++i) {
             pai[i] = i;
@@ -48,20 +50,13 @@ public:
         }
         sort(arestas.begin(), arestas.end());
 
-        long int pesos = 0;
         for (auto& [peso, u, v] : arestas) {
             int x = find(pai, u);
             int y = find(pai, v);
             if (x != y) {
                 pesos += peso;
+                componentes--;
                 union_sets(pai, rank, x, y);
-            }
-        }
-
-        int componentes = 0;
-        for (int i = 0; i < pai.size(); ++i) {
-            if (pai[i] == i) {
-                componentes++;
             }
         }
         return {componentes, pesos};
