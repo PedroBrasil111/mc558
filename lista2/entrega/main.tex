@@ -20,6 +20,7 @@
 
 \captionsetup[algorithm]{labelformat=empty} % Removes numbering from algorithm captions
 \renewcommand{\thealgorithm}{} % Removes the numbering but keeps Algoritmo
+\setlength{\parindent}{1.5em} % Adjust the 1.5em to control the size of the indentation
 
 
 \begin{document}
@@ -48,7 +49,7 @@
 \textbf{\largeÁrvore Geradora Mínima}
 \vspace{0.5cm}
 
-- \textbf{Problema escolhido:} \textit{Acacias}, 8 pontos
+- \textbf{Problema escolhido:} \textit{Acacias}, 8 pontos.
 
 \vspace{0.25cm}
 
@@ -87,22 +88,93 @@
         Note que, como $G$ pode ser desconexo, \textsc{AGM-Kruskal-Acacias} retorna uma floresta de árvores geradoras mínimas. \\
         Para provar a corretude, é necessário utilizar a seguinte invariante:
         \begin{quote}
-            \textit{No início de cada iteração, (1) $pesos$ é a soma dos pesos das arestas em $A$ e (2) $componentes$ é o número de componentes conexas em $G_A = (V, A)$.}
+            \textit{No início de cada iteração do laço \textbf{para} da linha} 7 \textit{: (1) $pesos$ é a soma dos pesos das arestas em $A$ e (2) $componentes$ é o número de componentes conexas em $G_A = (V, A)$.}
         \end{quote}
-        \textbf{Base:} No início do algoritmo, $A = \emptyset$ e $componentes = |V[G]|$; logo, a invariante é verdadeira. \\
-        \textbf{Hipótese:} Suponha que a invariante é verdadeira no início da iteração $i$. \\
+        \textbf{Base:} No início do algoritmo, $A = \emptyset$. Inicialmente, $pesos = 0$ e $componentes = |V[G]|$; portanto, a invariante é trivialmente verdadeira. \\\\
+        \textbf{Hipótese:} Suponha que a invariante é verdadeira no \mbox{início~da~iteração~$i$}. \\\\
         \textbf{Passo:} Na iteração $i + 1$: \\
     Caso 1: A aresta $(u, v)$ é adicionada a $A$.
     \begin{itemize}
         \item (1) Então $u$ e $v$ são unidos em uma mesma componente conexa, reduzindo o número total de componentes em 1. Na linha 12, $componentes$ é decrementada em 1.
-        \item (2) Além disso, o peso da aresta $(u, v)$ é somado a $pesos$ na linha 11.
+        \item (2) Além disso, o peso da aresta $(u, v)$ é somado \mbox{a $pesos$ na linha 11}.
     \end{itemize}
     Caso 2: A aresta $(u, v)$ não é adicionada a $A$.
     \begin{itemize}
-        \item (1) Neste caso, $u$ e $v$ já pertencem à mesma componente conexa, então $componentes$ não é alterada.
+        \item (1) Neste caso, $u$ e $v$ já pertencem à mesma componente conexa, e $componentes$ não é alterada.
         \item (2) O peso da aresta $(u, v)$ não é somado a $pesos$.
     \end{itemize}
+    Portanto, ao fim da iteracão $i + 1$, a invariante é mantida. \\\\
     \textbf{Conclusão:} A invariante é mantida em todas as iterações; logo, ao final do algoritmo, $componentes$ é o número de componentes conexas em $G_A$ e $custo$ é a soma dos pesos das arestas em $A$.
+\end{itemize}
+ 
+% Caminhos minimos  
+\textbf{\large Caminhos mínimos}
+\vspace{0.5cm}
+
+- \textbf{Problema escolhido:} \textit{Trip to BH}, 8 pontos.
+
+\vspace{0.25cm}
+
+- \textbf{Definição do problema:}
+\begin{itemize}
+    \item \textbf{Entrada:} Uma linha contendo dois inteiros N e M, indicando, respectivamente, o número de 
+    vértices (numerados de $1$ a $N$) e de arestas. Em seguida, M linhas, cada uma contendo quatro inteiros $A$ $B$ $T$ $R$, indicando que 
+    existe uma aresta de $A$ para $B$ com tipo $T$ (0 ou 1) e peso $R$.
+    \item \textbf{Saída:} A menor distância entre os vértices $1$ e $N$ dentre os caminhos que utilizam apenas arestas de um mesmo tipo.
+    \item \textbf{Solução:} O problema pode ser resolvido diretamente com uma pequena alteração ao algoritmo de Dijkstra visto em aula: basta adicionar um parâmetro $t$ a \textsc{Dijkstra} que indica o tipo da aresta que será considerada na iteração.
+    Dessa forma, uma aresta só deverá ser considerada se seu tipo for igual a $t$. Então, basta executar o algoritmo duas vezes, uma para cada tipo de aresta ($t = 0$ e $t = 1$), e comparar os resultados.
+    \item \textbf{Complexidade:} Como visto em aula, o algoritmo de Dijkstra para caminhos mínimos apresenta complexidade $O((V + E) \log E)$. No enunciado do exercício, 
+    é explicitado que $M \leq 2(N^2 - N)$, então $|V| = N$ e $|E| = O(N^2)$. \\
+    Note que a verificação de qual tipo de aresta será considerada é realizada em O(1), pois basta comparar o tipo da aresta antes de adicioná-la à fila de prioridade. \\
+    A complexidade total de executar o algoritmo duas vezes, uma para $t = 0$ e outra para $t = 1$, é, portanto, $O(N^2 \log N)$.
+    \item \textbf{Corretude:} Sejam $G_0 = (V, E_0)$ e $G_1 = (V, E_1)$, onde $E_t = \{e \in E\ |\ e.T=t\}$ ($e.T$ indica o tipo de $e$).
+    Então executar \textsc{Dijkstra} duas vezes, uma para $G_0$ e outra para $G_1$, resulta em caminhos mínimos que contêm apenas arestas de um mesmo tipo. \\
+    A alteração sugerida ao algoritmo de Dijkstra garante que, em cada iteração, apenas arestas do tipo $t$ sejam consideradas. Isso equivale a processar apenas o subgrafo $G_t$, provando a corretude dessa solução.\\
+\end{itemize}
+
+% Fluxo
+
+\textbf{\large Fluxo em redes}
+\vspace{0.5cm}
+
+- \textbf{Problema escolhido:} \textit{My T-Shirt Suits Me}, 6 pontos.
+
+\vspace{0.25cm}
+
+- \textbf{Definição do problema:}
+\begin{itemize}
+    \item \textbf{Entrada:} \\
+    Uma linha contendo dois inteiros $N$ e $M$, $N \ge M$, indicando, respectivamente, o número de 
+    camisetas e de voluntários. Em seguida, M linhas, cada uma contendo dois tamanhos de camiseta (dentre \textit{XXL, XL, L, M, S} ou \textit{XS}) que podem ser usados por cada voluntário. N sempre é um múltiplo de 6.\\
+    \item \textbf{Saída:} \textit{YES}, se for possível distribuir todas as camisetas de forma que cada voluntário receba uma camiseta de um tamanho que possa usar, ou \textit{NO}, caso contrário.
+    \item \textbf{Solução:} \\
+    Seja $G = (V, E)$ um grafo que possui um vértice para cada camiseta e um vértice para cada voluntário, e $C, P \subset V$ conjuntos que contêm os vértices associados às camisetas e aos voluntários, respectivamente.
+    Adicione uma aresta de capacidade 1 indo de $c \in C$ para $v \in P$ se $v$ puder vestir $c$.
+    Então $|V| = 6 + M$ e $|E| = 2M$, pois cada voluntário pode vestir dois tamanhos diferentes, e G é um grafo bipartido com bipartição $(C, P)$. \\
+    Em seguida, crie e conecte um vértice $s$ a cada vértice $c \in C$ por uma aresta de capacidade $N/6$, e conecte cada vértice $v \in P$ a um novo vértice $t$ com uma aresta de capacidade 1. 
+    Agora, $|V| = 6 + M + 2 = M + 8$ e $|E| = 2M + M + 6 = 3M + 6$\\
+    Nessa configuração, se \textit{f} for um fluxo máximo e \mbox{$|f| = M = c(\{s\} \cup C \cup P, \{t\})$}, então é possível distribuir todas as camisetas.
+    É possível encontrar $f$ ao executar o algoritmo \textsc{Edmonds-Karp} para a rede $(G, c, s, t)$, onde $c$ armazena as capacidades das arestas, e então retornar \textit{YES} se $|f| = M$, e \textit{NO} caso contrário. \\
+    \item \textbf{Complexidade:} 
+    \begin{itemize}
+        \item A leitura pode ser feita em $O(M)$, pois são lidos $M$ pares de tamanhos de camiseta;
+        \item A instanciação do grafo $G$ e a adição das arestas de capacidade 1 podem ser feitas com complexidade $O(M)$, uma vez que $|V| = O(M)$ e $|E| = O(M)$;
+        \item A implementação de \textsc{Edmonds-Karp} possui complexidade $O(VE^2)$.
+        \item Para descobrir o valor do fluxo máximo, basta somar o fluxo das 6 arestas que saem de $s$, o que pode ser feito em $O(1)$, tal como a checagem para determinar se $|f| = M$ (no algoritmo submetido ao Beecrowd, foi feita uma alteração a \textsc{Edmonds-Karp} para que isso fosse realizado durante sua execução).
+    \end{itemize}
+    Portanto, com $|V| = M + 8$ e $|E| = 3M + 6$, a complexidade total será:
+    $$O(M) + O(M) + O((M + 8)\cdot(3M+6)^2) + O(1) = O(M \cdot M^2) = O(M^3)$$ \\
+    \item \textbf{Corretude:} \\
+    Sejam $G = (V, E)$, $C$, $P$, $s$ e $t$ definidos como anteriormente.
+    Então cada vértice $c \in C$ possui uma aresta de capacidade $N/6$ incidente; portanto, a capacidade total das arestas que saem de $s$ é \mbox{$N/6 \cdot 6 = N$}, representando as N camisetas. Como há arestas de peso 1 indo das camisetas para os voluntários nos quais os tamanhos servem, um fluxo nesse grafo representa uma possível distribuição de camisetas. \\
+    Além disso, as únicas arestas incidentes em $t$ são as $M$ arestas de peso 1 que representam os $M$ voluntários. Portanto, \mbox{$c(V - \{t\}, \{t\}) = M$}, logo, sendo $f'$ um fluxo qualquer em G, $|f'| = f(V - \{t\}, \{t\}) \le M$. \\
+    Dessa forma, há duas possibilidades para um fluxo máximo $f$ em $G$:
+    \begin{enumerate}
+        \item $|f| = M$. Então \mbox{$f(v, t) = 1 \ \forall v \in P$}, ou seja, todos os voluntários pertencem a um caminho de $s$ a $t$ em $f$. Nesse caso, cada voluntário receberá uma camiseta que pode vestir.
+        \item $|f| < M$. Então \mbox{$(\exists v \in P) \ f(v, t) = 0$}, i.e., ao menos um voluntário não receberá uma camiseta.
+    \end{enumerate}
+    Portanto, se $|f| = M$, a resposta é \textit{YES}; caso contrário, a resposta é \textit{NO}.
+
 \end{itemize}
 
 
