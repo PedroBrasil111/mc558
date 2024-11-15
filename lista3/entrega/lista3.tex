@@ -1,0 +1,78 @@
+\documentclass[
+    12pt,
+    a4paper,
+    brazil,
+    english
+]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{graphicx} % For including graphics (e.g., logos)
+\usepackage{float} % To place floats (e.g., algorithms) precisely
+\usepackage{ragged2e} % For text justification
+\usepackage{caption} % To control caption formatting
+\usepackage{amsmath} % For better text formatting in math mode
+
+% Document metadata
+\title{Lista Avaliativa 3}
+\author{Pedro Brasil Barroso - RA 260637}
+\date{\today} % Automatically inserts today's date
+
+%\captionsetup[algorithm]{labelformat=empty} % Removes numbering from algorithm captions
+\renewcommand{\thealgorithm}{} % Removes the numbering but keeps Algoritmo
+\setlength{\parindent}{1.5em} % Adjust the 1.5em to control the size of the indentation
+
+
+\begin{document}
+
+% Custom title page
+\begin{titlepage}
+    \centering
+
+    % Insert a logo if you want
+    %\includegraphics[width=0.2\textwidth]{logo.png} % Replace with your logo's path
+    \vspace*{6cm}
+
+    {\LARGE \textbf{MC558 - Lista Avaliativa 3}}
+    
+    \vspace{5.5cm}
+    {\Large Pedro Brasil Barroso - RA 260637}
+
+    \vfill
+
+    {\Large Universidade Estadual de Campinas} \\ % Replace with your university name
+    {\Large Instituto de Computação} \\
+
+    \vspace{1cm}
+\end{titlepage}
+
+\textbf{Problema selecionado:} 7 - \textit{Fábrica de sorvetes}
+
+\textbf{(a) Programa linear explicando as variáveis, função objetivo e restrições.}
+
+\textbf{Variáveis:}
+\begin{itemize}
+    \item $x_c$: quantidade de sorvete de chocolate (em litros) a ser produzida.
+    \item $x_b$: quantidade de sorvete de baunilha (em litros) a ser produzida.
+    \item $x_m$: quantidade de sorvete de morango (em litros) a ser produzida.
+\end{itemize}
+
+\textbf{Programa linear:}
+\begin{equation}
+    \text{max } 12x_c + 10x_b + 11x_m
+\end{equation}
+\begin{align}
+    \text{s.a:} \nonumber \\
+    0.5x_c + 0.4x_b + 0.45x_m &\leq 500 \\
+    0.1x_c + 0.15x_b + 0.12x_m &\leq 80 \\
+    10x_c + 8x_b + 9x_m &\leq 2000 \\
+    x_c &\geq 80 \\
+    x_b &\geq 60 \\
+    x_m &\geq 50 \\
+    x_i &\geq 0, \text{ para } i \in \{c, b, m\} \\
+    x_c, x_b, x_m &\in \mathbb{Q}
+\end{align}
+
+
+\end{document}
