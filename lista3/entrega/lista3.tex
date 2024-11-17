@@ -74,7 +74,6 @@
 \begin{equation}
     \text{max } 12x_c + 10x_b + 11x_m
 \end{equation}
-
 \begin{align}
     \text{s.a:} \nonumber \\
     0.5x_c + 0.4x_b + 0.45x_m &\leq 500 \\
@@ -92,7 +91,6 @@
 \begin{equation}
     \text{min } -12x_c - 10x_b - 11x_m
 \end{equation}
-
 \begin{align}
     \text{s.a:} \nonumber \\
     -0.5x_c - 0.4x_b - 0.45x_m &\geq -500 \\
@@ -115,7 +113,6 @@ duais.}
 \begin{equation}
     \text{max } -500y_l - 80y_a - 2000y_s +80y_c + 60y_b + 50y_m
 \end{equation}
-
 \begin{align}
     \text{s.a:} \nonumber \\
     -0.5y_l - 0.1y_a - 10y_s + y_c &\leq -12 \\
@@ -128,40 +125,73 @@ duais.}
 \textbf{Interpretação das variáveis duais:}
 
 \begin{itemize}
-    \item $y_l$: custo do leite por litro.
-    \item $y_a$: custo do açúcar por litro.
-    \item $y_s$: custo do saborizante por litro.
-    \item $y_c$: custo do sorvete de chocolate por litro.
-    \item $y_b$: custo do sorvete de baunilha por litro.
-    \item $y_m$: custo do sorvete de morango por litro.
+    \item $y_l$: impacto de aumentar a quantidade de leite disponível.
+    \item $y_a$: impacto de aumentar a quantidade de açúcar disponível.
+    \item $y_s$: impacto de aumentar a quantidade de saborizante disponível.
+    \item $y_c$: impacto de aumentar a produção de sorvete de chocolate.
+    \item $y_b$: impacto de aumentar a produção de sorvete de baunilha.
+    \item $y_m$: impacto de aumentar a produção de sorvete de morango.
 \end{itemize}
 
 \vspace{0.5cm}
 
-\textbf{(c) Apresente uma solução viável mas não ótima do primal e, usando folgas completares, mostre como
-deduzir que tal solução não é ótima. (e) Explique o passo a passo.}
+\textbf{(c) Uma solução viável mas não ótima do primal e, usando folgas completares, mostre como
+deduzir que tal solução não é ótima. (e) Explique o passo-a-passo.}
 
 \vspace{0.5cm}
 
 Sejam $x_c = 80$, $x_b = 60$, $x_m = 50$. Substituindo os valores nas restrições do primal, obtemos:
 
-\begin{align*}
+\begin{align}
         -0.5x_c - 0.4x_b - 0.45x_m  = -86.5 > -500 \text{ (}y_l = 0\text{)} \\
         -0.1x_c - 0.15x_b - 0.12x_m  = -23 > -80 \text{ (}y_a = 0\text{)} \\
         -10x_c - 8x_b - 9x_m  = -1730 > -2000 \text{ (}y_s = 0\text{)} \\
     x_c = 80 \text{ (}y_c \geq 0\text{)} \\
     x_b = 60 \text{ (}y_b \geq 0\text{)} \\
     x_m = 50 \text{ (}y_m \geq 0\text{)}
-\end{align*}
+\end{align}
 
-Analisamos as restrições duais:
+Todos os valores encontrados satisfazem as inequações do primal; portanto, a solução é viável. Para testar sua otimalidade, utilizaremos o teorema das folgas complementares. 
 
-\begin{align*}
+Seguindo tal teorema, nas equações $22$, $23$ e $24$, o valor é maior que o da restrição, então é necessário que, no dual, $y_l, y_a, y_s = 0$. Além disso, nas equações $25$, $26$ e $27$, o valor é igual ao da restrição, então no dual deve-se ter $y_c, y_b, y_m > 0$.
+
+Dessa forma, analisando as restrições do programa dual, temos:
+
+\begin{align}
     -0.5y_l - 0.1y_a - 10y_s + y_c = y_c &= -12 \\
     -0.4y_l - 0.15y_a - 8y_s + y_b = y_b &= -10 \\
-    -0.45y_l - 0.12y_a - 9y_s + y_m = y_m &= -11 \\
-\end{align*}
+    -0.45y_l - 0.12y_a - 9y_s + y_m = y_m &= -11
+\end{align}
 
-Como $y_c, y_b, y_m < 0$, a solução não é ótima.
+Pelo teorema das folgas complementares, como $y_c, y_b, y_m < 0$, não há solução viável para o dual. Logo, a solução não é ótima.
+
+\vspace{0.5cm}
+
+\textbf{(d) Apresente uma solução ótima do primal e, usando folgas complementares, mostre como provar a otimalidade. (e) Explique o passo-a-passo.}
+
+\vspace{0.5cm}
+
+Sejam $x_c = 80$, $x_b = 93,75$, $x_m = 50$. Substituindo os valores nas restrições do primal, obtemos:
+
+\begin{align}
+        -0.5x_c - 0.4x_b - 0.45x_m  = -100 > -500 \text{ (}y_l = 0\text{)} \\
+        -0.1x_c - 0.15x_b - 0.12x_m  = -28,0625 > -80 \text{ (}y_a = 0\text{)} \\
+        -10x_c - 8x_b - 9x_m  = -2000 \text{ (}y_s \geq 0\text{)} \\
+    x_c = 80 \text{ (}y_c \geq 0\text{)} \\
+    x_b = 93,75 > 80 \text{ (}y_b = 0\text{)} \\
+    x_m = 50 \text{ (}y_m \geq 0\text{)}
+\end{align}
+
+Todos os valores satisfazem as inequações do primal; portanto, a solução é viável. Para testar sua otimalidade teremos, analogamente ao item anterior, $y_l, y_a, y_b = 0$ e $y_c, y_s, y_m > 0$. 
+
+Dessa forma, analisando as equações do programa dual, temos:
+
+\begin{align}
+    -0.5y_l - 0.1y_a - 10y_s + y_c = -10y_s + y_c &= -12 \\
+    -0.4y_l - 0.15y_a - 8y_s + y_b = -8y_s &= -10 \\
+    -0.45y_l - 0.12y_a - 9y_s + y_m = -9y_s + y_m &= -11
+\end{align}
+
+A solução desse sistema é $y_s = 1,25 > 0$, $y_c = 0,5 > 0$ e $y_m = 0,25 > 0$. Logo, pelo teorema das folgas complementares, a solução é ótima.
 
 \end{document}

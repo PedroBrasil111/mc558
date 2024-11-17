@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1731879628.05933 "/home/pedro/coding/mc558/lista3/entrega/lista3.tex" "lista3.pdf" "lista3" 1731879628.30372 0
+["pdflatex"] 1731887955.46269 "/home/pedro/coding/mc558/lista3/entrega/lista3.tex" "lista3.pdf" "lista3" 1731887955.69892 0
   "/etc/texmf/web2c/texmf.cnf" 1730510200.56668 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pedro/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1730510386.94715 14040 77890772144fb42034c4fff0d54fcf1c ""
-  "/home/pedro/coding/mc558/lista3/entrega/lista3.tex" 1731879627.89828 5085 77b5fc9ba212a6ec0b60d61997cf0f21 ""
+  "/home/pedro/coding/mc558/lista3/entrega/lista3.tex" 1731887955.28523 7082 b10dc2f945a60d988ba9ac65513f749d ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -76,8 +76,8 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1730510350.95708 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1730510355 6831854 8bfcf74e8f9062c8e096c33d536d848d ""
   "image.png" 1731874029.75833 105095 18d4bef71deb1d0594c2cc29e71d1bf8 ""
-  "lista3.aux" 1731879628.27528 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
-  "lista3.tex" 1731879627.89828 5085 77b5fc9ba212a6ec0b60d61997cf0f21 ""
+  "lista3.aux" 1731887955.67223 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
+  "lista3.tex" 1731887955.28523 7082 b10dc2f945a60d988ba9ac65513f749d ""
   (generated)
   "lista3.aux"
   "lista3.log"
